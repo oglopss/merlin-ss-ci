@@ -5,8 +5,9 @@
 # export PATH=$HOME/am-toolchains/brcm-arm-sdk/hndtools-armeabi-2013.11/bin:$PATH
 # export PATH=$PATH:$HOME/am-toolchains/brcm-arm-hnd/crosstools-arm-gcc-5.3-linux-4.1-glibc-2.22-binutils-2.25/usr/bin
 
+export TOOLCHAIN=$HOME/am-toolchains/brcm-arm-sdk/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin
 
-export PATH=$PATH:$HOME/am-toolchains/brcm-arm-sdk/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin
+export PATH=$PATH:$TOOLCHAIN
 
 # for testing, disable after releasing
 #export SS_VER=v3.0.0
@@ -412,8 +413,8 @@ ss_build()
     ls -l $HOME/build
     echo ========home/builds=========
     ls -l $HOME/builds    
-    echo ========home/x-tools=========
-    ls -l $HOME/x-tools   
+    echo ========$TOOLCHAIN=========
+    ls -l $TOOLCHAIN
     # echo ========home/x-tools/mipsel-unknown-linux-uclibc=========
     # ls -l $HOME/x-tools/mipsel-unknown-linux-uclibc    
     
