@@ -3,7 +3,7 @@
 # Add current directory to PATH
 # export PATH="$(pwd):$(pwd)/crosstool-ng:$PATH"
 # export PATH=$HOME/am-toolchains/brcm-arm-sdk/hndtools-armeabi-2013.11/bin:$PATH
-export PATH=$HOME/am-toolchains/brcm-arm-hnd/crosstools-arm-gcc-5.3-linux-4.1-glibc-2.22-binutils-2.25/usr/bin:$PATH
+export PATH=$PATH:$HOME/am-toolchains/brcm-arm-hnd/crosstools-arm-gcc-5.3-linux-4.1-glibc-2.22-binutils-2.25/usr/bin
 
 # for testing, disable after releasing
 #export SS_VER=v3.0.0
