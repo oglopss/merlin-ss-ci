@@ -446,7 +446,7 @@ ss_build()
     
 
     cd $TRAVIS_BUILD_DIR
-    git clone --depth 1 https://github.com/shadowsocks/shadowsocks-libev.git
+    git clone https://github.com/shadowsocks/shadowsocks-libev.git
 
     # go into ss dir
     cd $TRAVIS_BUILD_DIR/shadowsocks-libev
