@@ -163,7 +163,7 @@ pcre_build()
     # export PCRE_VER=8.40
     # wget --no-passive-ftp ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-$PCRE_VER.tar.gz
 
-    wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-$PCRE_VER.tar.gz
+    travis_retry wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-$PCRE_VER.tar.gz
     tar xf pcre-$PCRE_VER.tar.gz
     cd pcre-$PCRE_VER
 
@@ -446,7 +446,7 @@ ss_build()
     
 
     cd $TRAVIS_BUILD_DIR
-    git clone https://github.com/shadowsocks/shadowsocks-libev.git
+    git clone --depth 1 https://github.com/shadowsocks/shadowsocks-libev.git
 
     # go into ss dir
     cd $TRAVIS_BUILD_DIR/shadowsocks-libev
