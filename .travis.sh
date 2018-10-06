@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # Add current directory to PATH
-export PATH="$(pwd):$(pwd)/crosstool-ng:$PATH"
-export PATH=$HOME/x-tools/mipsel-unknown-linux-uclibc/bin:$PATH
+# export PATH="$(pwd):$(pwd)/crosstool-ng:$PATH"
+export PATH=$HOME/am-toolchains/brcm-arm-sdk/hndtools-armeabi-2013.11/bin:$PATH
 
 # for testing, disable after releasing
 #export SS_VER=v3.0.0
@@ -112,6 +112,7 @@ upload_test()
 download_toolchain()
 {
     echo ========= download_toolchain =========
+    mkdir -p $HOME/src
     cd $HOME/src
     wget https://www.dropbox.com/s/ebt7bluh5svormd/dbxcli?dl=0 -O dbxcli
     chmod +x ./dbxcli
@@ -144,10 +145,13 @@ download_toolchain()
     cd $HOME/src
     # ./dbxcli get x-tools.tar.gz
 
-    wget https://www.dropbox.com/s/ihmwyqbpd8xt3tq/x-tools.tar.gz?dl=0 -O x-tools.tar.gz
+    # wget https://www.dropbox.com/s/ihmwyqbpd8xt3tq/x-tools.tar.gz?dl=0 -O x-tools.tar.gz
     cd $HOME
     # chmod o+w x-tools
-    sudo tar xf $HOME/src/x-tools.tar.gz
+    # sudo tar xf $HOME/src/x-tools.tar.gz
+
+    git clone --depth 1 https://github.com/RMerl/am-toolchains.git
+
 }
 
 pcre_build()
@@ -163,7 +167,7 @@ pcre_build()
     tar xf pcre-$PCRE_VER.tar.gz
     cd pcre-$PCRE_VER
 
-    CC=mipsel-unknown-linux-uclibc-gcc CXX=mipsel-unknown-linux-uclibc-g++ AR=mipsel-unknown-linux-uclibc-ar RANLIB=mipsel-unknown-linux-uclibc-ranlib ./configure --host=mipsel-uclibc-linux --disable-cpp --prefix=$HOME/pcre-install
+    CC=arm-none-eabi-gcc CXX=arm-none-eabi-g++ AR=arm-none-eabi-ar RANLIB=arm-none-eabi-ranlib ./configure --host=arm-none-eabi --disable-cpp --prefix=$HOME/pcre-install
 
     make > /dev/null 2>&1
 
@@ -189,7 +193,7 @@ openssl_build()
     tar xf openssl-$OPENSSL_VER.tar.gz -C ../
     cd ../openssl-$OPENSSL_VER
     # git checkout tags/OpenSSL_1_0_2g
-    CC=mipsel-unknown-linux-uclibc-gcc CXX=mipsel-unknown-linux-uclibc-g++ AR=mipsel-unknown-linux-uclibc-ar RANLIB=mipsel-unknown-linux-uclibc-ranlib ./Configure no-asm shared --prefix=$HOME/openssl-install linux-mips32 &> /dev/null
+    CC=arm-none-eabi-gcc CXX=arm-none-eabi-g++ AR=arm-none-eabi-ar RANLIB=arm-none-eabi-ranlib ./Configure no-asm shared --prefix=$HOME/openssl-install linux-armv4 &> /dev/null
     make > /dev/null 2>&1
     rm -rf $HOME/openssl-install
 
@@ -204,7 +208,7 @@ zlib_build()
     # export PATH=$HOME/x-tools/mipsel-unknown-linux-uclibc/bin:$PATH
     tar xf zlib-$ZLIB_VER.tar.gz -C ../
     cd ../zlib-$ZLIB_VER
-    CC=mipsel-unknown-linux-uclibc-gcc CXX=mipsel-unknown-linux-uclibc-g++ AR=mipsel-unknown-linux-uclibc-ar RANLIB=mipsel-unknown-linux-uclibc-ranlib ./configure --prefix=$HOME/zlib-install &> /dev/null
+    CC=arm-none-eabi-gcc CXX=arm-none-eabi-g++ AR=arm-none-eabi-ar RANLIB=arm-none-eabi-ranlib ./configure --prefix=$HOME/zlib-install &> /dev/null
     make > /dev/null 2>&1
 
     rm -rf $HOME/zlib-install
@@ -232,7 +236,7 @@ libsodium_build()
     tar xf libsodium-$LIBSODIUM_VER.tar.gz
     cd libsodium-$LIBSODIUM_VER
  
-    LDFLAGS="-Wl,-rpath,/jffs/lib" CC=mipsel-unknown-linux-uclibc-gcc CXX=mipsel-unknown-linux-uclibc-g++ AR=mipsel-unknown-linux-uclibc-ar RANLIB=mipsel-unknown-linux-uclibc-ranlib  ./configure --prefix=$HOME/libsodium-install --host=mipsel-uclibc-linux
+    LDFLAGS="-Wl,-rpath,/jffs/lib" CC=arm-none-eabi-gcc CXX=arm-none-eabi-g++ AR=arm-none-eabi-ar RANLIB=arm-none-eabi-ranlib  ./configure --prefix=$HOME/libsodium-install --host=arm-none-eabi
  
     make  > /dev/null 2>&1
 
@@ -260,10 +264,10 @@ mbedtls_build()
     # echo === current cflags ="$CFLAGS"=
     make clean
     
-    CC="mipsel-unknown-linux-uclibc-gcc -fPIC" CXX="mipsel-unknown-linux-uclibc-g++ -fPIC" AR=mipsel-unknown-linux-uclibc-ar RANLIB=mipsel-unknown-linux-uclibc-ranlib make SHARED=1 # CFLAGS=-fPIC
+    CC="arm-none-eabi-gcc -fPIC" CXX="arm-none-eabi-g++ -fPIC" AR=arm-none-eabi-ar RANLIB=arm-none-eabi-ranlib make SHARED=1 # CFLAGS=-fPIC
 
     
-    # CC=mipsel-unknown-linux-uclibc-gcc CXX=mipsel-unknown-linux-uclibc-g++ AR=mipsel-unknown-linux-uclibc-ar RANLIB=mipsel-unknown-linux-uclibc-ranlib make
+    # CC=arm-none-eabi-gcc CXX=arm-none-eabi-g++ AR=arm-none-eabi-ar RANLIB=arm-none-eabi-ranlib make
 
 
 
@@ -299,7 +303,7 @@ udns_build()
     
     # make clean
     
-    CC=mipsel-unknown-linux-uclibc-gcc CXX=mipsel-unknown-linux-uclibc-g++ AR=mipsel-unknown-linux-uclibc-ar RANLIB=mipsel-unknown-linux-uclibc-ranlib ./configure
+    CC=arm-none-eabi-gcc CXX=arm-none-eabi-g++ AR=arm-none-eabi-ar RANLIB=arm-none-eabi-ranlib ./configure
     
     make clean
     
@@ -324,7 +328,7 @@ c-ares_build()
     git clone --depth 1 https://github.com/c-ares/c-ares.git
     cd c-ares
     ./buildconf
-    CC=mipsel-unknown-linux-uclibc-gcc CXX=mipsel-unknown-linux-uclibc-g++ AR=mipsel-unknown-linux-uclibc-ar RANLIB=mipsel-unknown-linux-uclibc-ranlib ./configure --prefix=$HOME/cares-install --host=mipsel-uclibc-linux
+    CC=arm-none-eabi-gcc CXX=arm-none-eabi-g++ AR=arm-none-eabi-ar RANLIB=arm-none-eabi-ranlib ./configure --prefix=$HOME/cares-install --host=arm-none-eabi
 
     make
     make install
@@ -348,7 +352,7 @@ libev_build()
     # cd libev
     cd libev-$LIBEV_VER
     
-    CPPFLAGS="-I$HOME/src/udns-$UDNS_VER" LDFLAGS="-L$HOME/src/udns-$UDNS_VER" CC=mipsel-unknown-linux-uclibc-gcc CXX=mipsel-unknown-linux-uclibc-g++ AR=mipsel-unknown-linux-uclibc-ar RANLIB=mipsel-unknown-linux-uclibc-ranlib ./configure --prefix=$HOME/libev-install --host=mipsel-uclibc-linux
+    CPPFLAGS="-I$HOME/src/udns-$UDNS_VER" LDFLAGS="-L$HOME/src/udns-$UDNS_VER" CC=arm-none-eabi-gcc CXX=arm-none-eabi-g++ AR=arm-none-eabi-ar RANLIB=arm-none-eabi-ranlib ./configure --prefix=$HOME/libev-install --host=arm-none-eabi
 
     echo ========inside libev_build=========
     echo ========config.h=========
@@ -383,9 +387,9 @@ obfs_build()
     git checkout tags/v$OBFS_VER
     git submodule init && git submodule update
     ./autogen.sh
-    # LIBS="-lpthread -lm" LDFLAGS="-Wl,-rpath,/jffs/lib -L$HOME/libsodium-install/lib -L$HOME/src/udns-$UDNS_VER -L$HOME/libev-install/lib" CFLAGS="-I$HOME/libsodium-install/include -I$HOME/src/udns-$UDNS_VER -I$HOME/libev-install/include" CC=mipsel-unknown-linux-uclibc-gcc CXX=mipsel-unknown-linux-uclibc-g++ AR=mipsel-unknown-linux-uclibc-ar RANLIB=mipsel-unknown-linux-uclibc-ranlib ./configure --host=mipsel-uclibc-linux --prefix=$HOME/obfs-install --disable-ssp --disable-documentation
+    # LIBS="-lpthread -lm" LDFLAGS="-Wl,-rpath,/jffs/lib -L$HOME/libsodium-install/lib -L$HOME/src/udns-$UDNS_VER -L$HOME/libev-install/lib" CFLAGS="-I$HOME/libsodium-install/include -I$HOME/src/udns-$UDNS_VER -I$HOME/libev-install/include" CC=arm-none-eabi-gcc CXX=arm-none-eabi-g++ AR=arm-none-eabi-ar RANLIB=arm-none-eabi-ranlib ./configure --host=arm-none-eabi --prefix=$HOME/obfs-install --disable-ssp --disable-documentation
 
-    LDFLAGS="-Wl,-rpath,/jffs/lib -L$HOME/libsodium-install/lib -L$HOME/cares-install/lib -L$HOME/libev-install/lib" CFLAGS="-I$HOME/libsodium-install/include -I$HOME/cares-install/include -I$HOME/libev-install/include" CC=mipsel-unknown-linux-uclibc-gcc CXX=mipsel-unknown-linux-uclibc-g++ AR=mipsel-unknown-linux-uclibc-ar RANLIB=mipsel-unknown-linux-uclibc-ranlib ./configure --host=mipsel-uclibc-linux --prefix=$HOME/obfs-install --disable-ssp --disable-documentation
+    LDFLAGS="-Wl,-rpath,/jffs/lib -L$HOME/libsodium-install/lib -L$HOME/cares-install/lib -L$HOME/libev-install/lib" CFLAGS="-I$HOME/libsodium-install/include -I$HOME/cares-install/include -I$HOME/libev-install/include" CC=arm-none-eabi-gcc CXX=arm-none-eabi-g++ AR=arm-none-eabi-ar RANLIB=arm-none-eabi-ranlib ./configure --host=arm-none-eabi --prefix=$HOME/obfs-install --disable-ssp --disable-documentation
     make && make install
 
     echo ========$HOME/obfs-install=========
@@ -473,7 +477,7 @@ ss_build()
 
     # echo $pcre_config
 
-    # config_cmd="CC=mipsel-unknown-linux-uclibc-gcc CXX=mipsel-unknown-linux-uclibc-g++ AR=mipsel-unknown-linux-uclibc-ar RANLIB=mipsel-unknown-linux-uclibc-ranlib ./configure --disable-ssp --host=mipsel-uclibc-linux --prefix=$HOME/ss-install --with-openssl=$HOME/openssl-install --with-zlib=$HOME/zlib-install $pcre_config"
+    # config_cmd="CC=arm-none-eabi-gcc CXX=arm-none-eabi-g++ AR=arm-none-eabi-ar RANLIB=arm-none-eabi-ranlib ./configure --disable-ssp --host=arm-none-eabi --prefix=$HOME/ss-install --with-openssl=$HOME/openssl-install --with-zlib=$HOME/zlib-install $pcre_config"
 
     # echo "$config_cmd"
 
@@ -586,12 +590,12 @@ ss_build()
             
         #     cd $TRAVIS_BUILD_DIR/shadowsocks-libev
 
-        #     CPPFLAGS="-I$HOME/src/udns-$UDNS_VER -I$HOME/libev-install/include -I$HOME/zlib-install/include -I$HOME/openssl-install/include " LDFLAGS="-Wl,-rpath,/jffs/lib -L$HOME/src/udns-$UDNS_VER -L$HOME/libev-install/lib -L$HOME/zlib-install/lib -L$HOME/openssl-install/lib" CC=mipsel-unknown-linux-uclibc-gcc CXX=mipsel-unknown-linux-uclibc-g++ AR=mipsel-unknown-linux-uclibc-ar RANLIB=mipsel-unknown-linux-uclibc-ranlib ./configure --disable-ssp --prefix=$HOME/ss-install --with-pcre=$HOME/pcre-install --with-sodium=$HOME/libsodium-install --with-mbedtls=$HOME/mbedtls-install --host=mipsel-uclibc-linux
+        #     CPPFLAGS="-I$HOME/src/udns-$UDNS_VER -I$HOME/libev-install/include -I$HOME/zlib-install/include -I$HOME/openssl-install/include " LDFLAGS="-Wl,-rpath,/jffs/lib -L$HOME/src/udns-$UDNS_VER -L$HOME/libev-install/lib -L$HOME/zlib-install/lib -L$HOME/openssl-install/lib" CC=arm-none-eabi-gcc CXX=arm-none-eabi-g++ AR=arm-none-eabi-ar RANLIB=arm-none-eabi-ranlib ./configure --disable-ssp --prefix=$HOME/ss-install --with-pcre=$HOME/pcre-install --with-sodium=$HOME/libsodium-install --with-mbedtls=$HOME/mbedtls-install --host=arm-none-eabi
 
         # else
 
             echo greater or equal to 263, use mbedtls
-            CPPFLAGS="-I$HOME/cares-install/include -I$HOME/libev-install/include -I$HOME/zlib-install/include" LDFLAGS="-Wl,-rpath,/jffs/lib -L$HOME/cares-install/lib -L$HOME/libev-install/lib -L$HOME/zlib-install/lib" CC=mipsel-unknown-linux-uclibc-gcc CXX=mipsel-unknown-linux-uclibc-g++ AR=mipsel-unknown-linux-uclibc-ar RANLIB=mipsel-unknown-linux-uclibc-ranlib ./configure --disable-ssp --prefix=$HOME/ss-install --with-pcre=$HOME/pcre-install --with-sodium=$HOME/libsodium-install --with-mbedtls=$HOME/mbedtls-install --host=mipsel-uclibc-linux
+            CPPFLAGS="-I$HOME/cares-install/include -I$HOME/libev-install/include -I$HOME/zlib-install/include" LDFLAGS="-Wl,-rpath,/jffs/lib -L$HOME/cares-install/lib -L$HOME/libev-install/lib -L$HOME/zlib-install/lib" CC=arm-none-eabi-gcc CXX=arm-none-eabi-g++ AR=arm-none-eabi-ar RANLIB=arm-none-eabi-ranlib ./configure --disable-ssp --prefix=$HOME/ss-install --with-pcre=$HOME/pcre-install --with-sodium=$HOME/libsodium-install --with-mbedtls=$HOME/mbedtls-install --host=arm-none-eabi
     
         # fi
 
@@ -628,7 +632,7 @@ ss_build()
 # #         export CPPFLAGS="$CPPFLAGS -I$HOME/libsodium-install/include -I$HOME/src/udns-$UDNS_VER -I$HOME/openssl-install/include -I$HOME/libev-install/include"
 # #         export LDFLAGS="$LDFLAGS -Wl,-rpath,/opt/lib:/lib:/usr/lib -L$HOME/libsodium-install/lib -L$HOME/src/udns-$UDNS_VER -L$HOME/libev-install/lib"
 
-#         LDFLAGS="$LDFLAGS -Wl,-rpath,/jffs/lib" CC=mipsel-unknown-linux-uclibc-gcc CXX=mipsel-unknown-linux-uclibc-g++ AR=mipsel-unknown-linux-uclibc-ar RANLIB=mipsel-unknown-linux-uclibc-ranlib ./configure --disable-ssp --host=mipsel-uclibc-linux --prefix=$HOME/ss-install --with-openssl=$HOME/openssl-install --with-zlib=$HOME/zlib-install --with-pcre=$HOME/pcre-install --with-sodium=$HOME/libsodium-install --with-mbedtls=$HOME/mbedtls-install
+#         LDFLAGS="$LDFLAGS -Wl,-rpath,/jffs/lib" CC=arm-none-eabi-gcc CXX=arm-none-eabi-g++ AR=arm-none-eabi-ar RANLIB=arm-none-eabi-ranlib ./configure --disable-ssp --host=arm-none-eabi --prefix=$HOME/ss-install --with-openssl=$HOME/openssl-install --with-zlib=$HOME/zlib-install --with-pcre=$HOME/pcre-install --with-sodium=$HOME/libsodium-install --with-mbedtls=$HOME/mbedtls-install
         
 #     fi
 
@@ -677,11 +681,11 @@ ss_build()
 
     # exclude ss-nat new in 2.4.7
 
-    find $HOME/ss-install/bin -type f \( ! -iname "ss-nat" \) -execdir mipsel-unknown-linux-uclibc-strip {} \;
+    find $HOME/ss-install/bin -type f \( ! -iname "ss-nat" \) -execdir arm-none-eabi-strip {} \;
     
 
     if [ "$SS_VER_INT" -ge 263 ]; then
-        find $HOME/obfs-install/bin -type f -execdir mipsel-unknown-linux-uclibc-strip {} \;
+        find $HOME/obfs-install/bin -type f -execdir arm-none-eabi-strip {} \;
     fi
 
 
@@ -732,7 +736,7 @@ ss_build()
 
 
     # strip them as well
-    mipsel-unknown-linux-uclibc-strip ./*so*
+    arm-none-eabi-strip ./*so*
 
     echo ========final sizes =========
     ls -l --block-size=K

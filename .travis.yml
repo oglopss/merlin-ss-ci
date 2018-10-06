@@ -51,8 +51,8 @@ git:
     
 # Use sed to replace the SSH URL with the public URL, then initialize submodules
 before_install:
-    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
-    - git submodule update --init --recursive
+    # - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+    # - git submodule update --init --recursive
     # - sudo apt-get update -qq
     # - sudo apt-get install libpcre3 libpcre3-dev -y
     
@@ -74,12 +74,12 @@ env:
     # - CT_SAMPLE=mipsel-unknown-linux-gnu
     matrix:
         # - export PATH=$HOME/x-tools/mipsel-unknown-linux-uclibc/bin:$PATH
-        - SS_VER=latest
-        - SS_VER=v3.2.0
+        # - SS_VER=latest
+        # - SS_VER=v3.2.0
         - SS_VER=v3.1.3
-        - SS_VER=v3.1.2
-        - SS_VER=v3.1.1
-        - SS_VER=v3.1.0
+        # - SS_VER=v3.1.2
+        # - SS_VER=v3.1.1
+        # - SS_VER=v3.1.0
         # - SS_VER=v3.0.8
         # - SS_VER=v3.0.7
         # - SS_VER=v3.0.6
@@ -154,7 +154,7 @@ env:
     global:
         - secure: S79k11s3daFsF/b1dJRIRySC1bnsxgDhlgOu0ThKVhHoWtK6zrTAem6gCb2kHxoWzw73C9JBZKh3B5foldijG1vzTjU/7Emgm2Ip5+ZVuvpz3FDWmsyn4k+xvziqFC8cEeTF5QSDYnBV/dfaVbr7XvW9vyzFLKyGzUTROtobyKcdf6Tc7DZ7tdmvW/gFUlpcUkMkIN+G1pCbOPUzJqQWw9PsMLkDASuaOqSgg51BEawglhc/l3SrQrSVawsIyzIZ71fv1x54YtkItxkF/0ZXwerhVpE1hB4JnYvt0wkPeAxR8jE/L0w0x+Pw0diPJ5cjJNCuk7yIpF2H+WwpxhTGzCiHp5fv/UnG1uj6EUqp1YWHeaFUX1G3RV3AYiMjNx91TF2OoOY/fIE8zBVg2PkhDwOdwIAPEfphBtSC0v+lfiaVG3JdejMyw+VZ38CBVBVWOUQZdpVx0Wh76QHCqrP9W7AovbUqmPfTdRmQkhZLbpNUtQAP6e+Q4SUmtGkXTQbP9qbr033qFAvfWO9h7q3IJ0Bioshrkofr/aljAA5X1AyiR4pD95VrHuBykui5P7qCFF2VXxWfLOYFll9RYmy9vg1UrBXUw0LPK3jfMt884UxqUpgAMy7Oz2C6qxGQGhjx9OTXsxie4crbHWlkfax/g3Y0E6CCSZlFAxCVNspRr6I=
 
-        - secure: l/V9y87A1WE4FjqAa8tJw3NQ+Irddr6okeMIhoTBp73gIuEow4xUwQw5AkoxIcpNiTb8Z3IwOOvCNh3UuVtP74dxzpbq9UCai5uR1jU4x+wytOXkmUOUfWIr7hfTQuPAr6VvKdElzDqBqWrs6iRgsE78CKCuHZFCMs9iNYw+yrr9OudvB9DFeiEeE3OZzIi8a/zUc7T8P4F/rBI9M7siEBImn+jJ5CGE5ddG20pYhMnzqh+THXaZ6DmtvS75zo+aU3tXocmzRntHtemH/l/lX29612GUNupC6e1vvbtNGUyPVfX2oOQ9wV6fr4pHWglULR9OQdgjHBspYFsDQxCFgPTP6VjRhMDAKXTpDY9rbgZMo2RBTBDtwvXKV3dPuy4s+EKo9ez3ekBs2nuKsOC+kgRCXTaWxkddW76kzFkwOJt8qoHt0gfWU6A5H80fkPhPOxsid18WWHS21BuK6oLt9XW3wWqNxAFPpi8F1Wri0DgcwyHPGxvzPYg+Jb4xWGNhSnF+K6vjRrWnLtI8ysWnfzjgm7fQlGpHNTGQDOXbHmxLgRCgG2Nkae3z2wsGt83r+BCTiSynPOQxTGNm6bZEOLsd/xNtVNEc2nnqlbHDmSOx7JlGBGS7uXUASf5LT/7mSnBoiV0ExwzvsAqLRD+/H3mSeOkoV07Z1YOHvDsBdl0=
+        # - secure: l/V9y87A1WE4FjqAa8tJw3NQ+Irddr6okeMIhoTBp73gIuEow4xUwQw5AkoxIcpNiTb8Z3IwOOvCNh3UuVtP74dxzpbq9UCai5uR1jU4x+wytOXkmUOUfWIr7hfTQuPAr6VvKdElzDqBqWrs6iRgsE78CKCuHZFCMs9iNYw+yrr9OudvB9DFeiEeE3OZzIi8a/zUc7T8P4F/rBI9M7siEBImn+jJ5CGE5ddG20pYhMnzqh+THXaZ6DmtvS75zo+aU3tXocmzRntHtemH/l/lX29612GUNupC6e1vvbtNGUyPVfX2oOQ9wV6fr4pHWglULR9OQdgjHBspYFsDQxCFgPTP6VjRhMDAKXTpDY9rbgZMo2RBTBDtwvXKV3dPuy4s+EKo9ez3ekBs2nuKsOC+kgRCXTaWxkddW76kzFkwOJt8qoHt0gfWU6A5H80fkPhPOxsid18WWHS21BuK6oLt9XW3wWqNxAFPpi8F1Wri0DgcwyHPGxvzPYg+Jb4xWGNhSnF+K6vjRrWnLtI8ysWnfzjgm7fQlGpHNTGQDOXbHmxLgRCgG2Nkae3z2wsGt83r+BCTiSynPOQxTGNm6bZEOLsd/xNtVNEc2nnqlbHDmSOx7JlGBGS7uXUASf5LT/7mSnBoiV0ExwzvsAqLRD+/H3mSeOkoV07Z1YOHvDsBdl0=
 
 # Building the standard samples
 script:
