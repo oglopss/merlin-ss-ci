@@ -270,7 +270,7 @@ libsodium_build()
  
     LDFLAGS="-Wl,-rpath,/jffs/lib" CC=arm-uclibc-gcc CXX=arm-uclibc-g++ AR=arm-uclibc-ar RANLIB=arm-uclibc-ranlib  ./configure --prefix=$HOME/libsodium-install --host=arm-uclibc-linux
  
-    make  > /dev/null 2>&1
+    make  # > /dev/null 2>&1
 
     rm -rf $HOME/libsodium-install
     make install  > /dev/null 2>&1
