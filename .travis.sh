@@ -174,7 +174,7 @@ pcre_build()
     tar xf pcre-$PCRE_VER.tar.gz
     cd pcre-$PCRE_VER
 
-    CC=arm-uclibc-gcc CXX=arm-uclibc-g++ AR=arm-uclibc-ar RANLIB=arm-uclibc-ranlib ./configure --host=arm-uclibc-linux --disable-cpp --prefix=$HOME/pcre-install
+    CC=arm-brcm-linux-uclibcgnueabi-gcc CXX=arm-brcm-linux-uclibcgnueabi-g++ AR=arm-brcm-linux-uclibcgnueabi-ar RANLIB=arm-brcm-linux-uclibcgnueabi-ranlib ./configure --host=arm-brcm-linux-uclibcgnueabi-linux --disable-cpp --prefix=$HOME/pcre-install
 
     make > /dev/null 2>&1
 
@@ -186,7 +186,7 @@ pcre_build()
     tail -n 1000 $HOME/src/pcre-8.40/config.log
     echo ========pcrelogend=========
     echo $TOOLCHAIN/bin
-    ls -l /home/travis/am-toolchains/brcm-arm-sdk/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin/arm-uclibc-gcc
+    ls -l /home/travis/am-toolchains/brcm-arm-sdk/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin/arm-brcm-linux-uclibcgnueabi-gcc
 
     ls -l /home/travis/am-toolchains/brcm-arm-sdk/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin/arm-brcm-linux-uclibcgnueabi-gcc
     ls -l $TOOLCHAIN/bin
@@ -210,7 +210,7 @@ openssl_build()
     tar xf openssl-$OPENSSL_VER.tar.gz -C ../
     cd ../openssl-$OPENSSL_VER
     # git checkout tags/OpenSSL_1_0_2g
-    CC=arm-uclibc-gcc CXX=arm-uclibc-g++ AR=arm-uclibc-ar RANLIB=arm-uclibc-ranlib ./Configure no-asm shared --prefix=$HOME/openssl-install linux-armv4 &> /dev/null
+    CC=arm-brcm-linux-uclibcgnueabi-gcc CXX=arm-brcm-linux-uclibcgnueabi-g++ AR=arm-brcm-linux-uclibcgnueabi-ar RANLIB=arm-brcm-linux-uclibcgnueabi-ranlib ./Configure no-asm shared --prefix=$HOME/openssl-install linux-armv4 &> /dev/null
     make > /dev/null 2>&1
     rm -rf $HOME/openssl-install
 
@@ -225,7 +225,7 @@ zlib_build()
     # export PATH=$HOME/x-tools/mipsel-unknown-linux-uclibc/bin:$PATH
     tar xf zlib-$ZLIB_VER.tar.gz -C ../
     cd ../zlib-$ZLIB_VER
-    CC=arm-uclibc-gcc CXX=arm-uclibc-g++ AR=arm-uclibc-ar RANLIB=arm-uclibc-ranlib ./configure --prefix=$HOME/zlib-install &> /dev/null
+    CC=arm-brcm-linux-uclibcgnueabi-gcc CXX=arm-brcm-linux-uclibcgnueabi-g++ AR=arm-brcm-linux-uclibcgnueabi-ar RANLIB=arm-brcm-linux-uclibcgnueabi-ranlib ./configure --prefix=$HOME/zlib-install &> /dev/null
     make > /dev/null 2>&1
 
     rm -rf $HOME/zlib-install
@@ -253,7 +253,7 @@ libsodium_build()
     tar xf libsodium-$LIBSODIUM_VER.tar.gz
     cd libsodium-$LIBSODIUM_VER
  
-    LDFLAGS="-Wl,-rpath,/jffs/lib" CC=arm-uclibc-gcc CXX=arm-uclibc-g++ AR=arm-uclibc-ar RANLIB=arm-uclibc-ranlib  ./configure --prefix=$HOME/libsodium-install --host=arm-uclibc-linux
+    LDFLAGS="-Wl,-rpath,/jffs/lib" CC=arm-brcm-linux-uclibcgnueabi-gcc CXX=arm-brcm-linux-uclibcgnueabi-g++ AR=arm-brcm-linux-uclibcgnueabi-ar RANLIB=arm-brcm-linux-uclibcgnueabi-ranlib  ./configure --prefix=$HOME/libsodium-install --host=arm-brcm-linux-uclibcgnueabi-linux
  
     make  > /dev/null 2>&1
 
@@ -281,10 +281,10 @@ mbedtls_build()
     # echo === current cflags ="$CFLAGS"=
     make clean
     
-    CC="arm-uclibc-gcc -fPIC" CXX="arm-uclibc-g++ -fPIC" AR=arm-uclibc-ar RANLIB=arm-uclibc-ranlib make SHARED=1 # CFLAGS=-fPIC
+    CC="arm-brcm-linux-uclibcgnueabi-gcc -fPIC" CXX="arm-brcm-linux-uclibcgnueabi-g++ -fPIC" AR=arm-brcm-linux-uclibcgnueabi-ar RANLIB=arm-brcm-linux-uclibcgnueabi-ranlib make SHARED=1 # CFLAGS=-fPIC
 
     
-    # CC=arm-uclibc-gcc CXX=arm-uclibc-g++ AR=arm-uclibc-ar RANLIB=arm-uclibc-ranlib make
+    # CC=arm-brcm-linux-uclibcgnueabi-gcc CXX=arm-brcm-linux-uclibcgnueabi-g++ AR=arm-brcm-linux-uclibcgnueabi-ar RANLIB=arm-brcm-linux-uclibcgnueabi-ranlib make
 
 
 
@@ -320,7 +320,7 @@ udns_build()
     
     # make clean
     
-    CC=arm-uclibc-gcc CXX=arm-uclibc-g++ AR=arm-uclibc-ar RANLIB=arm-uclibc-ranlib ./configure
+    CC=arm-brcm-linux-uclibcgnueabi-gcc CXX=arm-brcm-linux-uclibcgnueabi-g++ AR=arm-brcm-linux-uclibcgnueabi-ar RANLIB=arm-brcm-linux-uclibcgnueabi-ranlib ./configure
     
     make clean
     
@@ -345,7 +345,7 @@ c-ares_build()
     git clone --depth 1 https://github.com/c-ares/c-ares.git
     cd c-ares
     ./buildconf
-    CC=arm-uclibc-gcc CXX=arm-uclibc-g++ AR=arm-uclibc-ar RANLIB=arm-uclibc-ranlib ./configure --prefix=$HOME/cares-install --host=arm-uclibc-linux
+    CC=arm-brcm-linux-uclibcgnueabi-gcc CXX=arm-brcm-linux-uclibcgnueabi-g++ AR=arm-brcm-linux-uclibcgnueabi-ar RANLIB=arm-brcm-linux-uclibcgnueabi-ranlib ./configure --prefix=$HOME/cares-install --host=arm-brcm-linux-uclibcgnueabi-linux
 
     make
     make install
@@ -369,7 +369,7 @@ libev_build()
     # cd libev
     cd libev-$LIBEV_VER
     
-    CPPFLAGS="-I$HOME/src/udns-$UDNS_VER" LDFLAGS="-L$HOME/src/udns-$UDNS_VER" CC=arm-uclibc-gcc CXX=arm-uclibc-g++ AR=arm-uclibc-ar RANLIB=arm-uclibc-ranlib ./configure --prefix=$HOME/libev-install --host=arm-uclibc-linux
+    CPPFLAGS="-I$HOME/src/udns-$UDNS_VER" LDFLAGS="-L$HOME/src/udns-$UDNS_VER" CC=arm-brcm-linux-uclibcgnueabi-gcc CXX=arm-brcm-linux-uclibcgnueabi-g++ AR=arm-brcm-linux-uclibcgnueabi-ar RANLIB=arm-brcm-linux-uclibcgnueabi-ranlib ./configure --prefix=$HOME/libev-install --host=arm-brcm-linux-uclibcgnueabi-linux
 
     echo ========inside libev_build=========
     echo ========config.h=========
@@ -404,9 +404,9 @@ obfs_build()
     git checkout tags/v$OBFS_VER
     git submodule init && git submodule update
     ./autogen.sh
-    # LIBS="-lpthread -lm" LDFLAGS="-Wl,-rpath,/jffs/lib -L$HOME/libsodium-install/lib -L$HOME/src/udns-$UDNS_VER -L$HOME/libev-install/lib" CFLAGS="-I$HOME/libsodium-install/include -I$HOME/src/udns-$UDNS_VER -I$HOME/libev-install/include" CC=arm-uclibc-gcc CXX=arm-uclibc-g++ AR=arm-uclibc-ar RANLIB=arm-uclibc-ranlib ./configure --host=arm-uclibc-linux --prefix=$HOME/obfs-install --disable-ssp --disable-documentation
+    # LIBS="-lpthread -lm" LDFLAGS="-Wl,-rpath,/jffs/lib -L$HOME/libsodium-install/lib -L$HOME/src/udns-$UDNS_VER -L$HOME/libev-install/lib" CFLAGS="-I$HOME/libsodium-install/include -I$HOME/src/udns-$UDNS_VER -I$HOME/libev-install/include" CC=arm-brcm-linux-uclibcgnueabi-gcc CXX=arm-brcm-linux-uclibcgnueabi-g++ AR=arm-brcm-linux-uclibcgnueabi-ar RANLIB=arm-brcm-linux-uclibcgnueabi-ranlib ./configure --host=arm-brcm-linux-uclibcgnueabi-linux --prefix=$HOME/obfs-install --disable-ssp --disable-documentation
 
-    LDFLAGS="-Wl,-rpath,/jffs/lib -L$HOME/libsodium-install/lib -L$HOME/cares-install/lib -L$HOME/libev-install/lib" CFLAGS="-I$HOME/libsodium-install/include -I$HOME/cares-install/include -I$HOME/libev-install/include" CC=arm-uclibc-gcc CXX=arm-uclibc-g++ AR=arm-uclibc-ar RANLIB=arm-uclibc-ranlib ./configure --host=arm-uclibc-linux --prefix=$HOME/obfs-install --disable-ssp --disable-documentation
+    LDFLAGS="-Wl,-rpath,/jffs/lib -L$HOME/libsodium-install/lib -L$HOME/cares-install/lib -L$HOME/libev-install/lib" CFLAGS="-I$HOME/libsodium-install/include -I$HOME/cares-install/include -I$HOME/libev-install/include" CC=arm-brcm-linux-uclibcgnueabi-gcc CXX=arm-brcm-linux-uclibcgnueabi-g++ AR=arm-brcm-linux-uclibcgnueabi-ar RANLIB=arm-brcm-linux-uclibcgnueabi-ranlib ./configure --host=arm-brcm-linux-uclibcgnueabi-linux --prefix=$HOME/obfs-install --disable-ssp --disable-documentation
     make && make install
 
     echo ========$HOME/obfs-install=========
@@ -498,7 +498,7 @@ ss_build()
 
     # echo $pcre_config
 
-    # config_cmd="CC=arm-uclibc-gcc CXX=arm-uclibc-g++ AR=arm-uclibc-ar RANLIB=arm-uclibc-ranlib ./configure --disable-ssp --host=arm-uclibc-linux --prefix=$HOME/ss-install --with-openssl=$HOME/openssl-install --with-zlib=$HOME/zlib-install $pcre_config"
+    # config_cmd="CC=arm-brcm-linux-uclibcgnueabi-gcc CXX=arm-brcm-linux-uclibcgnueabi-g++ AR=arm-brcm-linux-uclibcgnueabi-ar RANLIB=arm-brcm-linux-uclibcgnueabi-ranlib ./configure --disable-ssp --host=arm-brcm-linux-uclibcgnueabi-linux --prefix=$HOME/ss-install --with-openssl=$HOME/openssl-install --with-zlib=$HOME/zlib-install $pcre_config"
 
     # echo "$config_cmd"
 
@@ -611,12 +611,12 @@ ss_build()
             
         #     cd $TRAVIS_BUILD_DIR/shadowsocks-libev
 
-        #     CPPFLAGS="-I$HOME/src/udns-$UDNS_VER -I$HOME/libev-install/include -I$HOME/zlib-install/include -I$HOME/openssl-install/include " LDFLAGS="-Wl,-rpath,/jffs/lib -L$HOME/src/udns-$UDNS_VER -L$HOME/libev-install/lib -L$HOME/zlib-install/lib -L$HOME/openssl-install/lib" CC=arm-uclibc-gcc CXX=arm-uclibc-g++ AR=arm-uclibc-ar RANLIB=arm-uclibc-ranlib ./configure --disable-ssp --prefix=$HOME/ss-install --with-pcre=$HOME/pcre-install --with-sodium=$HOME/libsodium-install --with-mbedtls=$HOME/mbedtls-install --host=arm-uclibc-linux
+        #     CPPFLAGS="-I$HOME/src/udns-$UDNS_VER -I$HOME/libev-install/include -I$HOME/zlib-install/include -I$HOME/openssl-install/include " LDFLAGS="-Wl,-rpath,/jffs/lib -L$HOME/src/udns-$UDNS_VER -L$HOME/libev-install/lib -L$HOME/zlib-install/lib -L$HOME/openssl-install/lib" CC=arm-brcm-linux-uclibcgnueabi-gcc CXX=arm-brcm-linux-uclibcgnueabi-g++ AR=arm-brcm-linux-uclibcgnueabi-ar RANLIB=arm-brcm-linux-uclibcgnueabi-ranlib ./configure --disable-ssp --prefix=$HOME/ss-install --with-pcre=$HOME/pcre-install --with-sodium=$HOME/libsodium-install --with-mbedtls=$HOME/mbedtls-install --host=arm-brcm-linux-uclibcgnueabi-linux
 
         # else
 
             echo greater or equal to 263, use mbedtls
-            CPPFLAGS="-I$HOME/cares-install/include -I$HOME/libev-install/include -I$HOME/zlib-install/include" LDFLAGS="-Wl,-rpath,/jffs/lib -L$HOME/cares-install/lib -L$HOME/libev-install/lib -L$HOME/zlib-install/lib" CC=arm-uclibc-gcc CXX=arm-uclibc-g++ AR=arm-uclibc-ar RANLIB=arm-uclibc-ranlib ./configure --disable-ssp --prefix=$HOME/ss-install --with-pcre=$HOME/pcre-install --with-sodium=$HOME/libsodium-install --with-mbedtls=$HOME/mbedtls-install --host=arm-uclibc-linux
+            CPPFLAGS="-I$HOME/cares-install/include -I$HOME/libev-install/include -I$HOME/zlib-install/include" LDFLAGS="-Wl,-rpath,/jffs/lib -L$HOME/cares-install/lib -L$HOME/libev-install/lib -L$HOME/zlib-install/lib" CC=arm-brcm-linux-uclibcgnueabi-gcc CXX=arm-brcm-linux-uclibcgnueabi-g++ AR=arm-brcm-linux-uclibcgnueabi-ar RANLIB=arm-brcm-linux-uclibcgnueabi-ranlib ./configure --disable-ssp --prefix=$HOME/ss-install --with-pcre=$HOME/pcre-install --with-sodium=$HOME/libsodium-install --with-mbedtls=$HOME/mbedtls-install --host=arm-brcm-linux-uclibcgnueabi-linux
     
         # fi
 
@@ -653,7 +653,7 @@ ss_build()
 # #         export CPPFLAGS="$CPPFLAGS -I$HOME/libsodium-install/include -I$HOME/src/udns-$UDNS_VER -I$HOME/openssl-install/include -I$HOME/libev-install/include"
 # #         export LDFLAGS="$LDFLAGS -Wl,-rpath,/opt/lib:/lib:/usr/lib -L$HOME/libsodium-install/lib -L$HOME/src/udns-$UDNS_VER -L$HOME/libev-install/lib"
 
-#         LDFLAGS="$LDFLAGS -Wl,-rpath,/jffs/lib" CC=arm-uclibc-gcc CXX=arm-uclibc-g++ AR=arm-uclibc-ar RANLIB=arm-uclibc-ranlib ./configure --disable-ssp --host=arm-uclibc-linux --prefix=$HOME/ss-install --with-openssl=$HOME/openssl-install --with-zlib=$HOME/zlib-install --with-pcre=$HOME/pcre-install --with-sodium=$HOME/libsodium-install --with-mbedtls=$HOME/mbedtls-install
+#         LDFLAGS="$LDFLAGS -Wl,-rpath,/jffs/lib" CC=arm-brcm-linux-uclibcgnueabi-gcc CXX=arm-brcm-linux-uclibcgnueabi-g++ AR=arm-brcm-linux-uclibcgnueabi-ar RANLIB=arm-brcm-linux-uclibcgnueabi-ranlib ./configure --disable-ssp --host=arm-brcm-linux-uclibcgnueabi-linux --prefix=$HOME/ss-install --with-openssl=$HOME/openssl-install --with-zlib=$HOME/zlib-install --with-pcre=$HOME/pcre-install --with-sodium=$HOME/libsodium-install --with-mbedtls=$HOME/mbedtls-install
         
 #     fi
 
@@ -702,11 +702,11 @@ ss_build()
 
     # exclude ss-nat new in 2.4.7
 
-    find $HOME/ss-install/bin -type f \( ! -iname "ss-nat" \) -execdir arm-uclibc-strip {} \;
+    find $HOME/ss-install/bin -type f \( ! -iname "ss-nat" \) -execdir arm-brcm-linux-uclibcgnueabi-strip {} \;
     
 
     if [ "$SS_VER_INT" -ge 263 ]; then
-        find $HOME/obfs-install/bin -type f -execdir arm-uclibc-strip {} \;
+        find $HOME/obfs-install/bin -type f -execdir arm-brcm-linux-uclibcgnueabi-strip {} \;
     fi
 
 
@@ -757,7 +757,7 @@ ss_build()
 
 
     # strip them as well
-    arm-uclibc-strip ./*so*
+    arm-brcm-linux-uclibcgnueabi-strip ./*so*
 
     echo ========final sizes =========
     ls -l --block-size=K
