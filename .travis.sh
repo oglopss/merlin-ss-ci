@@ -170,7 +170,7 @@ pcre_build()
     # export PCRE_VER=8.40
     # wget --no-passive-ftp ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-$PCRE_VER.tar.gz
 
-    travis_retry wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-$PCRE_VER.tar.gz
+    # travis_retry wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-$PCRE_VER.tar.gz
     tar xf pcre-$PCRE_VER.tar.gz
     cd pcre-$PCRE_VER
 
