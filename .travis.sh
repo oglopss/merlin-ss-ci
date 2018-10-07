@@ -186,6 +186,10 @@ pcre_build()
     tail -n 1000 $HOME/src/pcre-8.40/config.log
     echo ========pcrelogend=========
 
+    ls -l $TOOLCHAIN/bin
+
+    echo ========TOOLCHAIN=========
+
 # echo ========$HOME/pcre-install=========
 # ls -l $HOME/pcre-install 
 # echo ========$HOME/pcre-install/include=========
