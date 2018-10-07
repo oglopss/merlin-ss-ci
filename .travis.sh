@@ -159,6 +159,12 @@ download_toolchain()
 
     git clone https://github.com/RMerl/am-toolchains.git
 
+#     configure:3851: arm-uclibc-gcc    conftest.c  >&5
+# /home/travis/am-toolchains/brcm-arm-sdk/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin/../libexec/gcc/arm-brcm-linux-uclibcgnueabi/4.5.3/cc1: error while loading shared libraries: libelf.so.1: cannot open shared object file: No such file or directory
+    sudo dpkg --add-architecture i386
+    sudo apt-get update
+    sudo apt-get install libelf1:i386 libelf-dev:i386
+
 }
 
 pcre_build()
