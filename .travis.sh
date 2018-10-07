@@ -185,7 +185,7 @@ pcre_build()
     echo ========pcrelog=========
     tail -n 1000 $HOME/src/pcre-8.40/config.log
     echo ========pcrelogend=========
-
+    echo $TOOLCHAIN/bin
     ls -l $TOOLCHAIN/bin
 
     echo ========TOOLCHAIN=========
