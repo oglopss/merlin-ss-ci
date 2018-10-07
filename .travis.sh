@@ -195,6 +195,8 @@ pcre_build()
     arm-uclibc-gcc -v
     arm-brcm-linux-uclibcgnueabi-gcc -v
     ldd /home/travis/am-toolchains/brcm-arm-sdk/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin/arm-brcm-linux-uclibcgnueabi-gcc
+    uname -i
+    file /home/travis/am-toolchains/brcm-arm-sdk/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin/arm-brcm-linux-uclibcgnueabi-gcc
 
     ls -l $TOOLCHAIN/bin
 
