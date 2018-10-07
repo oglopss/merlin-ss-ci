@@ -186,7 +186,8 @@ pcre_build()
     tail -n 1000 $HOME/src/pcre-8.40/config.log
     echo ========pcrelogend=========
     echo $TOOLCHAIN/bin
-    ls -l /home/travis/am-toolchains/brcm-arm-sdk/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin/arm-uclibc-gcc
+    /home/travis/am-toolchains/brcm-arm-sdk/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin/arm-uclibc-gcc -v
+    ldd /home/travis/am-toolchains/brcm-arm-sdk/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin/arm-uclibc-gcc
 
     ls -l /home/travis/am-toolchains/brcm-arm-sdk/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin/arm-brcm-linux-uclibcgnueabi-gcc
     ls -l $TOOLCHAIN/bin
