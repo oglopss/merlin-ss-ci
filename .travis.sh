@@ -270,7 +270,10 @@ libsodium_build()
  
     LDFLAGS="-Wl,-rpath,/jffs/lib" CC=arm-uclibc-gcc CXX=arm-uclibc-g++ AR=arm-uclibc-ar RANLIB=arm-uclibc-ranlib  ./configure --prefix=$HOME/libsodium-install --host=arm-uclibc-linux
  
-    make  # > /dev/null 2>&1
+    # make # > /dev/null 2>&1 
+    make # &
+    echo ===libsodiumDone====
+    # keep_alive
 
     rm -rf $HOME/libsodium-install
     make install  > /dev/null 2>&1
@@ -279,6 +282,34 @@ libsodium_build()
     # popd
     # popd
 
+}
+
+
+keep_alive()
+{
+    local build_pid=$!
+
+    # Start a runner task to print a "still running" line every 5 minutes
+    # to avoid travis to think that the build is stuck
+    {
+        while true
+        do
+            sleep 300
+            printf "Crosstool-NG is still running ...\r"
+        done
+    } &
+    local runner_pid=$!
+
+    # Wait for the build to finish and get the result
+    wait $build_pid 2>/dev/null 
+    local result=$?
+
+    # Stop the runner task
+    kill $runner_pid
+    wait $runner_pid 2>/dev/null
+
+    # Return the result
+    return $result
 }
 
 mbedtls_build()
