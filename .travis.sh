@@ -181,7 +181,10 @@ pcre_build()
     rm -rf $HOME/pcre-install
     
     make install > /dev/null 2>&1
-
+    
+    echo ========pcrelog=========
+    tail -n 1000 $HOME/src/pcre-8.40/config.log
+    echo ========pcrelogend=========
 
 # echo ========$HOME/pcre-install=========
 # ls -l $HOME/pcre-install 
