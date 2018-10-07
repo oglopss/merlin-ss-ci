@@ -7,7 +7,7 @@
 
 export TOOLCHAIN=$HOME/am-toolchains/brcm-arm-sdk/hndtools-arm-linux-2.6.36-uclibc-4.5.3
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$TOOLCHAIN/lib
+export LD_LIBRARY_PATH=$TOOLCHAIN/lib:$LD_LIBRARY_PATH
 
 export PATH=$PATH:$TOOLCHAIN/bin
 
