@@ -157,7 +157,7 @@ download_toolchain()
     # chmod o+w x-tools
     # sudo tar xf $HOME/src/x-tools.tar.gz
 
-    git clone --depth 1 https://github.com/RMerl/am-toolchains.git
+    git clone https://github.com/RMerl/am-toolchains.git
 
 }
 
@@ -195,7 +195,7 @@ pcre_build()
     arm-uclibc-gcc -v
     arm-brcm-linux-uclibcgnueabi-gcc -v
     ldd /home/travis/am-toolchains/brcm-arm-sdk/hndtools-arm-linux-2.6.36-uclibc-4.5.3/bin/arm-brcm-linux-uclibcgnueabi-gcc
-    
+
     ls -l $TOOLCHAIN/bin
 
     echo ========TOOLCHAIN=========
