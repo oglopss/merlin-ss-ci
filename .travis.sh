@@ -271,7 +271,7 @@ mbedtls_build()
     # echo === current cflags ="$CFLAGS"=
     make clean
     
-    CC="arm-linux-gcc -fPIC" CXX="arm-linux-g++ -fPIC" AR=arm-uclibc-ar RANLIB=arm-uclibc-ranlib make SHARED=1 # CFLAGS=-fPIC
+    CC="arm-uclibc-gcc -fPIC" CXX="arm-uclibc-g++ -fPIC" AR=arm-uclibc-ar RANLIB=arm-uclibc-ranlib make SHARED=1 # CFLAGS=-fPIC
 
     
     # CC=arm-uclibc-gcc CXX=arm-uclibc-g++ AR=arm-uclibc-ar RANLIB=arm-uclibc-ranlib make
@@ -692,11 +692,11 @@ ss_build()
 
     # exclude ss-nat new in 2.4.7
 
-    find $HOME/ss-install/bin -type f \( ! -iname "ss-nat" \) -execdir arm-linux-strip {} \;
+    find $HOME/ss-install/bin -type f \( ! -iname "ss-nat" \) -execdir arm-uclibc-strip {} \;
     
 
     if [ "$SS_VER_INT" -ge 263 ]; then
-        find $HOME/obfs-install/bin -type f -execdir arm-linux-strip {} \;
+        find $HOME/obfs-install/bin -type f -execdir arm-uclibc-strip {} \;
     fi
 
 
@@ -747,7 +747,7 @@ ss_build()
 
 
     # strip them as well
-    arm-linux-strip ./*so*
+    arm-uclibc-strip ./*so*
 
     echo ========final sizes =========
     ls -l --block-size=K
