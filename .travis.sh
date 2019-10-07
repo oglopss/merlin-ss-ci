@@ -20,7 +20,7 @@ export OUT="> /dev/null 2>&1"
 export ZLIB_VER=1.2.11
 export OPENSSL_VER=1.0.2k
 
-export PCRE_VER=8.40
+export PCRE_VER=8.43
 export LIBSODIUM_VER=1.0.11
 export MBEDTLS_VER=2.4.2
 export UDNS_VER=0.4
@@ -176,7 +176,8 @@ pcre_build()
     # export PCRE_VER=8.40
     # wget --no-passive-ftp ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-$PCRE_VER.tar.gz
 
-    travis_retry wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-$PCRE_VER.tar.gz
+    # travis_retry wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-$PCRE_VER.tar.gz
+    travis_retry wget ftp://ftp.pcre.org/pub/pcre/pcre-$PCRE_VER.tar.gz
     tar xf pcre-$PCRE_VER.tar.gz
     cd pcre-$PCRE_VER
 
