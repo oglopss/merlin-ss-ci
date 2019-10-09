@@ -22,7 +22,7 @@ export OPENSSL_VER=1.0.2k
 
 export PCRE_VER=8.43
 export LIBSODIUM_VER=1.0.18
-export MBEDTLS_VER=2.4.2
+export MBEDTLS_VER=2.16.3
 export UDNS_VER=0.4
 export OBFS_VER=0.0.5
 
