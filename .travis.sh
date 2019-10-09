@@ -18,6 +18,8 @@ export PATH=$PATH:$TOOLCHAIN/bin
 export OUT="> /dev/null 2>&1"
 
 export ZLIB_VER=1.2.11
+
+# openssl is replace by Mbed TLS though, and is not used
 export OPENSSL_VER=1.0.2t
 
 export PCRE_VER=8.43
