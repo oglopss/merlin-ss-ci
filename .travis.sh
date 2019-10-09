@@ -18,7 +18,7 @@ export PATH=$PATH:$TOOLCHAIN/bin
 export OUT="> /dev/null 2>&1"
 
 export ZLIB_VER=1.2.11
-export OPENSSL_VER=1.0.2k
+export OPENSSL_VER=1.0.2t
 
 export PCRE_VER=8.43
 export LIBSODIUM_VER=1.0.18
