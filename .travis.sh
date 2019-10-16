@@ -276,8 +276,8 @@ libsodium_build()
  
     LDFLAGS="-Wl,-rpath,/jffs/lib" CC=arm-uclibc-gcc CXX=arm-uclibc-g++ AR=arm-uclibc-ar RANLIB=arm-uclibc-ranlib  ./configure --prefix=$HOME/libsodium-install --host=arm-uclibc-linux
  
-    # make # > /dev/null 2>&1 
-    make &
+    make # > /dev/null 2>&1 
+    # make &
     
     keep_alive
     echo ===libsodiumDone====
@@ -285,7 +285,7 @@ libsodium_build()
     rm -rf $HOME/libsodium-install
     make install  > /dev/null 2>&1
 
- 
+    tree $HOME/libsodium-install
     # popd
     # popd
 
@@ -790,9 +790,9 @@ ss_build()
     # copy so files
     if [ "$SS_VER_INT" -ge 263 ]; then 
 
-        cp $HOME/mbedtls-install/lib/libmbedcrypto.so.0 .
+        cp $HOME/mbedtls-install/lib/libmbedcrypto.so.3 .
         cp $HOME/libev-install/lib/libev.so.4 .
-        cp $HOME/libsodium-install/lib/libsodium.so.18 .
+        cp $HOME/libsodium-install/lib/libsodium.so.23 .
         cp $HOME/pcre-install/lib/libpcre.so.1 .
         cp $HOME/obfs-install/bin/obfs* .
 
