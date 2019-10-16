@@ -40,6 +40,7 @@ addons:
             - help2man
             - asciidoc
             - xmlto
+            - tree
             # must have these two or cross tool chain gcc errors out with
             # configure:3898: error: in `/home/travis/src/pcre-8.40':
             # configure:3900: error: C compiler cannot create executables
